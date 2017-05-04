@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 const layout = _.range(0, 16).map(n =>
 {

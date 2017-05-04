@@ -3,8 +3,8 @@ $cellSize: 70px;
   margin: auto auto;
   text-align: center;
   line-height: $cellSize;
-  width: 4*cellSize + cellSize*0.1*4 + 40px;
-  height: 4*cellSize + cellSize*0.1*4 + 40px;
+  width: 4*$cellSize + $cellSize*0.1*4 + 40px;
+  height: 4*$cellSize + $cellSize*0.1*4 + 40px;
   .cell {
       width: $cellSize;
       height: $cellSize;
