@@ -1,0 +1,27 @@
+$cellSize: 70px;
+.game {
+  margin: auto auto;
+  text-align: center;
+  line-height: $cellSize;
+  width: 4*cellSize + cellSize*0.1*4 + 40px;
+  height: 4*cellSize + cellSize*0.1*4 + 40px;
+  .cell {
+      width: $cellSize;
+      height: $cellSize;
+      margin-right: $cellSize*0.1;
+      border-radius: 4px;
+      margin-bottom: $cellSize *0.1;
+      background: white;
+      box-shadow: rgba(0,0,0,0.2) 0 1px 2px 0;
+      color: #333;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all .3s ease-in;
+      position: absolute;
+  }
+}
+.empty {
+  opacity: 0;
+}
+
