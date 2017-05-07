@@ -1,0 +1,54 @@
+.page {
+  position: absolute;
+  background: #ffffff;
+  margin: auto auto;
+  text-align: center;
+
+  width: $bgwidth;
+  height: $bgheight;
+
+  img {
+    margin: 10px auto;
+    width: 770px;
+    height: 770px;
+  }
+
+  .content {
+    width: 590px;
+    height: 590px;
+    background: #005e1f;
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    color: #fff;
+    padding: 30px;
+
+    .title {
+      font-family: trade-gothic-bold-extended, sans-serif;
+      font-weight: 700;
+      font-size: 28pt;
+      margin: 16px 0;
+    }
+
+    .description {
+      margin: 80px 0;
+      font-size: 20pt;
+    }
+
+    a {
+      color: #005e1f;
+      font-weight: 700;
+      font-size: 20pt;
+      background: #fff;
+      padding: 15px 40px;
+      border-radius: 20px;
+      text-decoration: none;
+
+      transition-duration: 0.3s;
+
+      &:hover {
+        color: #00e94a;
+      }
+    }
+  }
+}

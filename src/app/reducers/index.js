@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
 
+import TimerReducer from './TimerReducer';
+import UserFormReducer from './UserFormReducer';
+
 const rootReducer = combineReducers({
-  state: (state = {}) => state,
+  timer: TimerReducer,
+  userForm: UserFormReducer,
 });
 
 export default rootReducer;

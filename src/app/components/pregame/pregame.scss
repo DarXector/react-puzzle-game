@@ -1,0 +1,21 @@
+.pregame {
+  .content {
+    a {
+      color: #fff;
+      font-weight: 700;
+      font-size: 34pt;
+      background: #e20613;
+      padding: 20px 40px;
+      border-radius: 10px;
+      border: #004517 6px solid;
+      text-decoration: none;
+
+      transition-duration: 0.3s;
+
+      &:hover {
+        color: #fff;
+        background: #f65351;
+      }
+    }
+  }
+}

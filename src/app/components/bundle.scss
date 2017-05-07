@@ -1,6 +1,10 @@
 @import './common/base/variables';
 @import './common/base/global';
 @import './common/header';
+@import './common/footer';
+@import './common/page';
+@import './game/timer';
 @import './home/home';
-@import './about/about';
+@import './pregame/pregame';
+@import './gameend/gameend';
 @import './game/game';

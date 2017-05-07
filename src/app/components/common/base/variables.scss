@@ -1,4 +1,8 @@
-$gray: #5b5b5b;
-$light-gray: #e0e2e2;
-$light-blue: #288feb;
-$light-green: #28cb75;
+$cellSize: 250px;
+$rowCount: 3;
+$columnCount: 3;
+
+$bgwidth: $rowCount * $cellSize + $cellSize * 0.05 * $rowCount;
+$bgheight: $columnCount * $cellSize + $cellSize *0.05 * $columnCount;
+
+$darkgreen: #001c0b;

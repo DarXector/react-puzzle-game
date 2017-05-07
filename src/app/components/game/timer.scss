@@ -1,0 +1,30 @@
+.timer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -100px;
+  border-radius: 12px 12px 0 0;
+  background: #fff;
+  height: 90px;
+  width: 200px;
+  text-align: center;
+  color: #001c0b;
+
+  .label {
+    font-size: 10px;
+    margin: 3px;
+  }
+
+  .value-bg, .value {
+    position: absolute;
+    margin: 0;
+    font-family: digital, sans-serif;
+    font-size: 80px;
+    top: 12px;
+    left: 10px;
+  }
+
+  .value-bg {
+    color: #ccdfd2;
+  }
+}
