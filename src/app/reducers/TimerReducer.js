@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    console.log('TimerReducer', state, action);
 
     switch (action.type) {
         case TIMER_RESET:

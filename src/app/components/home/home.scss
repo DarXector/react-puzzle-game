@@ -12,7 +12,7 @@
       overflow: auto;
       box-sizing: border-box;
 
-      label, input {
+      label, .input-holder {
         display: inline-block;
         vertical-align: middle;
         margin: 5px 0;
@@ -23,14 +23,30 @@
         font-size: 14px;
         width: 35%;
       }
-      input {
-        text-align: center;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
+
+      .input-holder {
         width: 60%;
         box-sizing: border-box;
+
+        .error-message {
+          color: red;
+          font-size: 10px;
+        }
+
+        input {
+          text-align: center;
+          border: none;
+          padding: 10px 0;
+          font-size: 16px;
+          width: 100%;
+        }
+
+        .input-error {
+          border: 1px solid red;
+        }
       }
+
+
     }
 
     a, button {

@@ -4,8 +4,8 @@
   "description": "Starter for Express, React, Redux, SCSS applications",
   "scripts": {
     "dev": "webpack-dev-server --watch --colors",
-    "build": "rimraf dist && NODE_ENV=production webpack --colors",
-    "start": "NODE_ENV=production PORT=8080 pm2 start ./server.js",
+    "build": "rimraf dist && webpack -p",
+    "start": "SET NODE_ENV=production PORT=8080 pm2 start ./server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src test webpack"
