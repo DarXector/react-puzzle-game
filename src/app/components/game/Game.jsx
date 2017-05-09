@@ -142,7 +142,7 @@ class Game extends Component {
     {
         let show = null;
         if (this.state.showFinished) {
-            show = <img className="finished-puzzle" src="/static/img/solved_bg.png" />;
+            show = <img className="finished-puzzle" src="/img/solved_bg.png" />;
         } else {
             show = this.state.positions.map((i, key)=>
             {
@@ -152,7 +152,7 @@ class Game extends Component {
                             className={ cellClass }
                             onClick={ this.updatePosition.bind(this, key) }
                             style={ { transform: `translate3d(${ x + 10 }px,${ y + 10 }px,0)` } }>
-                    <img src={ `/static/img/${ key }.png`} />
+                    <img src={ `/img/${ key }.png`} />
                 </div>
             });
         }

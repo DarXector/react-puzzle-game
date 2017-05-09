@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React  from 'react';
+import PropTypes from 'prop-types';
 
 function Page({ children, additionalClass }) {
     return (
         <div className={ `page ${additionalClass}` }>
-            <img src="/static/img/solved_bg.png" />
+            <img src="/img/solved_bg.png" />
             <div className="content">
                 { children }
             </div>

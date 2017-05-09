@@ -125,7 +125,7 @@ class Home extends Component {
                     textButton="POVEŽI SA FACEBOOKOM"
                     appId="253686335106538"
                     autoLoad={false}
-                    fields="public_profile,email"
+                    fields="name,email,locale"
                     callback={this.responseFacebook.bind(this)} />
 
                 <a onClick={this.onConfirm.bind(this)}>POTVRDI</a>

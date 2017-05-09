@@ -6,7 +6,7 @@ function Header() {
     return (
         <header>
             <a href="https://www.w3schools.com" target="_blank" >
-                <img alt="PAN" src="/static/img/pan_logo.png" />
+                <img alt="PAN" src="/img/pan_logo.png" />
             </a>
             <Timer />
             <nav>
