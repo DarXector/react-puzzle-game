@@ -1,0 +1,23 @@
+.leaderboard {
+  margin: 20px auto;
+  width: 780px;
+  display: inline-block;
+  vertical-align: top;
+
+  .user {
+    color: #ffffff;
+    margin: 10px;
+  }
+
+  .left {
+    width: 45%;
+    float: left;
+    clear: left;
+  }
+
+  .right {
+    width: 45%;
+    float: right;
+    clear: right;
+  }
+}

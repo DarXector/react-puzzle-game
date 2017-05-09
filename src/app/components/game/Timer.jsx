@@ -15,10 +15,10 @@ class Timer extends Component{
         });
         this.stopTimerSubscription = EventBus.on('stopTimer', () => {
 
-            const { baseTime, startedAt, stoppedAt } = this.props;
-            const time = getElapsedTime(baseTime, startedAt, stoppedAt);
+            //const { baseTime, startedAt, stoppedAt } = this.props;
+            //const time = getElapsedTime(baseTime, startedAt, stoppedAt);
 
-            this.props.saveResult({ time });
+            //this.props.saveResult({ time });
             clearInterval(this.interval);
         });
     }

@@ -24,7 +24,7 @@ class TextInput extends Component {
         //If saving this field for final form submission, it gets passed
         // up to the top component for sending to the server
         if(this.props.onChange) {
-            this.props.onChange(event);
+            this.props.onChange(event.target.value);
         }
     }
 

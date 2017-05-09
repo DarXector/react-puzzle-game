@@ -4,6 +4,8 @@ import EventBus from 'eventing-bus'
 
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+
 import { startTimer, stopTimer, resetTimer} from '../../actions/';
 
 const layout = _.range(0, 9).map(n =>
@@ -106,6 +108,8 @@ class Game extends Component {
             EventBus.publish("startTimer");
             this.props.startTimer(0);
 
+            axios.post('game.php?token=12345&action=start');
+
         }.bind(this), 3000)
     }
 
@@ -134,6 +138,7 @@ class Game extends Component {
             {
                 EventBus.publish("stopTimer");
                 this.props.stopTimer();
+                axios.post('game.php?token=12345&action=end');
             }
         }
     }
