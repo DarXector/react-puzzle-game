@@ -110,9 +110,9 @@ class Game extends Component {
             EventBus.publish("startTimer");
             this.props.startTimer(0);
 
-            axios.post('/game.php?action=start').then((response) => {
-                this.token = response.token;
-                console.log('On game start token', this.token)
+            axios.get('/game.php?action=start').then((response) => {
+                console.log('On game start token', response);
+                this.token = response;
             });
 
         }.bind(this), 3000)
@@ -133,10 +133,8 @@ class Game extends Component {
             positions[emptyIndex] = index;
             positions[targetIndex] = 8;
             this.setState({ positions });
-            console.log('updatePosition', positions);
             let win = _.every(positions, (value, index, array)=>
             {
-                console.log('updatePosition', array[index - 1], value);
                 return index == 0 || parseInt(array[index - 1]) <= parseInt(value)
             });
             if (win)

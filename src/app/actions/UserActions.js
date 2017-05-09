@@ -1,8 +1,10 @@
-import { browserHistory } from 'react-router'
 import axios from 'axios';
 
 export const USER_UPDATE = 'user_update';
 export const USER_SAVE_SUCCESS = 'user_save_success';
+export const USER_SAVE_ERROR = 'user_save_error';
+export const USER_REGISTERED = 'user_save_error';
+export const USER_NOT_REGISTERED = 'user_save_error';
 
 
 export const userUpdate = ({ prop, value }) =>
@@ -13,23 +15,55 @@ export const userUpdate = ({ prop, value }) =>
     }
 };
 
+function userSaved(response) {
 
-function userSaved() {
-    browserHistory.push('/pregame');
+    console.log('userSaved', response);
 
-    return {
-        type: USER_SAVE_SUCCESS
+    if(response.status == "1") {
+        return {
+            type: USER_SAVE_SUCCESS
+        }
+    } else {
+        return {
+            type: USER_SAVE_ERROR,
+            payload: response.message
+        }
     }
 }
 
+function userRegistered(response) {
 
-export const userSave = ({ name, phone, email, city, country }) =>
+    console.log('userRegistered', response);
+
+    if(response.status == "1") {
+        return {
+            type: USER_REGISTERED
+        }
+    } else {
+        return {
+            type: USER_NOT_REGISTERED
+        }
+    }
+}
+
+export const userCheckRegistered = ({ userID }) =>
 {
-    console.log('userSave', name, phone, email, city, country);
+    console.log('userCheckRegistered', userID);
 
     return dispatch =>
     {
-        return axios.get(`/user.php?name=${name}&phone=${phone}&email=${email}&city=${city}&country=${country}`)
-                    .then(response => dispatch(userSaved()))
+        return axios.post(`/fbcheck.php?userid=${userID}`)
+                    .then(response => dispatch(userRegistered(response.data)))
+    };
+};
+
+export const userSave = ({ name, phone, email, city, country, userID }) =>
+{
+    console.log('userSave', name, phone, email, city, country, userID);
+
+    return dispatch =>
+    {
+        return axios.post(`/user.php?name=${name}&phone=${phone}&email=${email}&city=${city}&country=${country}&userid=${userID}`)
+                    .then(response => dispatch(userSaved(response.data)))
     };
 };

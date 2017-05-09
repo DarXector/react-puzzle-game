@@ -2,21 +2,44 @@ import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import { browserHistory } from 'react-router'
 
 import Page from '../common/Page'
 import TextInput from '../common/input/TextInput';
 
-import { userSave, userUpdate } from '../../actions/'
+import { userSave, userUpdate, userCheckRegistered } from '../../actions/'
 
 class Home extends Component {
 
     constructor() {
         super();
         this.inputs = [];
+        this.state = {
+            userID: false
+        }
     }
 
     responseFacebook(response) {
-        console.log(response);
+        console.log('responseFacebook', response);
+
+        const {userID , name, email} = response;
+
+        if(userID) {
+            this.props.userCheckRegistered({ userID }).then(() => {
+                console.log('this.props.loggedIn', this.props.loggedIn);
+                if(this.props.loggedIn) {
+                    browserHistory.push('/pregame');
+                } else {
+                    this.nameInput.validation(name, true);
+                    this.props.userUpdate({prop: 'name', value: name});
+
+                    this.emailInput.validation(email, true);
+                    this.props.userUpdate({prop: 'email', value: email});
+
+                    this.setState({ userID });
+                }
+            });
+        }
     }
 
     commonValidate() {
@@ -44,17 +67,23 @@ class Home extends Component {
 
         if(!allValid) return;
 
-        const {name, phone, email, city, country} = this.props;
-        this.props.userSave({name, phone, email, city, country});
+        const {name, phone, email, city, country, userID} = this.props;
+        this.props.userSave({name, phone, email, city, country, userID}).then(() => {
+            console.log('this.props.loggedIn', this.props.loggedIn);
+            if(this.props.loggedIn) {
+                browserHistory.push('/pregame');
+            }
+        });
     }
 
     render() {
+
         return (
             <Page additionalClass="home">
 
                 <p className="title">PODIJELI SA NAMA NEKOLIKO INFORMACIJA</p>
 
-                <div className="form">
+                <div className={ `form ${this.state.userID? '' : 'hidden'}` }>
                     <label>IME I PREZIME</label>
                     <TextInput
                         className="input-holder"
@@ -87,7 +116,7 @@ class Home extends Component {
                         invalidClass="input-error"
                         text="Zagreb"
                         required={true}
-                        minCharacters={3}
+                        minCharacters={2}
                         validate={ this.commonValidate }
                         onChange={ value => this.props.userUpdate({prop: 'city', value}) }
                         errorMessage="Grad nije validan"
@@ -119,16 +148,20 @@ class Home extends Component {
                         errorMessage="Broj mobitela nije validan"
                         emptyMessage="Broj mobitela je obavezan"
                         ref={(input) => { this.phoneInput = input }} />
+
+                    <a onClick={this.onConfirm.bind(this)}>POTVRDI</a>
                 </div>
 
-                <FacebookLogin
+                {this.state.userID? '' : <FacebookLogin
                     textButton="POVEŽI SA FACEBOOKOM"
                     appId="253686335106538"
-                    autoLoad={false}
-                    fields="name,email,locale"
-                    callback={this.responseFacebook.bind(this)} />
+                    autoLoad={true}
+                    fields="name,email"
+                    callback={this.responseFacebook.bind(this)} /> }
 
-                <a onClick={this.onConfirm.bind(this)}>POTVRDI</a>
+                {this.props.errorMessage? <InputError
+                    errorClass="error-message"
+                    errorMessage={this.props.errorMessage} /> : ''}
             </Page>
         )
     }
@@ -136,8 +169,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) =>
 {
-    const { name, phone, email, city, country } = state.userForm;
-    return { name, phone, email, city, country }
+    const { name, phone, email, city, country, errorMessage, loggedIn } = state.userForm;
+    return { name, phone, email, city, country, errorMessage, loggedIn }
 };
 
-export default connect(mapStateToProps, { userSave, userUpdate })(Home);
+export default connect(mapStateToProps, { userSave, userUpdate, userCheckRegistered })(Home);
