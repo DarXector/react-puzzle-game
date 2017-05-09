@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import EventBus from 'eventing-bus'
+import { browserHistory } from 'react-router'
 
 import { connect } from 'react-redux';
 
@@ -29,7 +30,8 @@ class Game extends Component {
                 6,7,8
             ]),
             showFinished: true
-        }
+        };
+        this.token = '';
     }
 
     shuffle(array) {
@@ -108,7 +110,10 @@ class Game extends Component {
             EventBus.publish("startTimer");
             this.props.startTimer(0);
 
-            axios.post('game.php?token=12345&action=start');
+            axios.post('/game.php?action=start').then((response) => {
+                this.token = response.token;
+                console.log('On game start token', this.token)
+            });
 
         }.bind(this), 3000)
     }
@@ -138,7 +143,10 @@ class Game extends Component {
             {
                 EventBus.publish("stopTimer");
                 this.props.stopTimer();
-                axios.post('game.php?token=12345&action=end');
+                axios.post(`/game.php?token=${this.token}&action=end`).then(function ()
+                {
+                    browserHistory.push('/gameend');
+                });
             }
         }
     }
