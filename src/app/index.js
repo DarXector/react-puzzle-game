@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import App from './components/App';
 import Home from './components/home/Home';
 import PreGame from './components/pregame/PreGame';
 import GameEnd from './components/gameend/GameEnd';
 import Game from './components/game/Game';
+import Rewards from './components/rewards/Rewards';
 
 import reducers from './reducers';
 
@@ -42,12 +43,13 @@ function requireCredentials(nextState, replace, next) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router onUpdate={() => window.scrollTo(0, 0)} history={browserHistory}>
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Home}  onEnter={requireCredentials} />;
         <Route path="/pregame" component={PreGame} onEnter={requireCredentials} />
         <Route path="/game" component={Game} onEnter={requireCredentials} />
         <Route path="/gameend" component={GameEnd} onEnter={requireCredentials}  />
+        <Route path="/rewards" component={Rewards} onEnter={requireCredentials}  />
       </Route>
     </Router>
   </Provider>

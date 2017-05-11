@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import Page from '../common/Page'
 import Form from './Form';
+import InputError from '../common/input/InputError';
 
 import { userSave, userUpdate, userCheckRegistered } from '../../actions/'
 
@@ -29,7 +30,7 @@ class Home extends Component {
             this.props.userCheckRegistered({ userid }).then(() => {
                 console.log('this.props.loggedIn', this.props.loggedIn);
                 if(this.props.loggedIn) {
-                    browserHistory.push('/pregame');
+                    hashHistory.push('/pregame');
                 } else {
                     this.form.nameInput.validation(name, true);
                     this.props.userUpdate({prop: 'name', value: name});
@@ -60,11 +61,11 @@ class Home extends Component {
 
         if(!allValid) return;
 
-        const {name, phone, email, city, country, userid} = this.props;
-        this.props.userSave({name, phone, email, city, country, userid}).then(() => {
+        const {name, phone, email, city, country} = this.props;
+        this.props.userSave({name, phone, email, city, country, userid: this.state.userid}).then(() => {
             console.log('this.props.loggedIn', this.props.loggedIn);
             if(this.props.loggedIn) {
-                browserHistory.push('/pregame');
+                hashHistory.push('/pregame');
             }
         });
     }

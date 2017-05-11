@@ -7,7 +7,7 @@ function GameEnd() {
   return (
     <Page additionalClass="gameend">
         <p className="title">SUPER REZULTAT!</p>
-        <p className="description">Sad još samo upiši svoje podatke kako bi, u slučaju dobitka, nagrada sigurno stigla u tvoje ruke.</p>
+        <p className="description">Niste zadovoljni rezultatom? Odigrajte ponovo.<br/>Ako ste dobitnik neke od nagrada bićete obavješteni</p>
         <Link to="/game">POKUŠAJ PONOVO</Link>
     </Page>
   )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import EventBus from 'eventing-bus'
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 
 import { connect } from 'react-redux';
 
@@ -16,8 +16,6 @@ const layout = _.range(0, 9).map(n =>
     return [260 * col, 260 * row];
 });
 
-
-
 class Game extends Component {
 
     constructor(props)
@@ -25,9 +23,9 @@ class Game extends Component {
         super(props);
         this.state = {
             positions: this.shuffle([
-                0,1,2,
-                3,4,5,
-                6,7,8
+                1,2,3,
+                4,5,6,
+                7,8,''
             ]),
             showFinished: true
         };
@@ -110,7 +108,7 @@ class Game extends Component {
             EventBus.publish("startTimer");
             this.props.startTimer(0);
 
-            axios.get('/game.php', { action:'start' }).then((response) => {
+            axios.post('/game.php', { action:'start' }).then((response) => {
                 console.log('On game start get token', response);
                 this.token = response.data;
                 console.log('On game start token', this.token);
@@ -122,7 +120,7 @@ class Game extends Component {
     updatePosition(index)
     {
         let { positions } = this.state;
-        let emptyIndex = positions.indexOf(8);
+        let emptyIndex = positions.indexOf('');
         let targetIndex = positions.indexOf(index);
         const dif = Math.abs(targetIndex - emptyIndex);
 
@@ -132,10 +130,11 @@ class Game extends Component {
         if (dif == 1 || dif == 3)
         {
             positions[emptyIndex] = index;
-            positions[targetIndex] = 8;
+            positions[targetIndex] = '';
             this.setState({ positions });
             let win = _.every(positions, (value, index, array)=>
             {
+                value = value == ''? 9 : value;
                 return index == 0 || parseInt(array[index - 1]) <= parseInt(value)
             });
             if (win)
@@ -145,7 +144,7 @@ class Game extends Component {
                 console.log('On game send token', this.token);
                 axios.post('/game.php', { token: this.token, action: 'end' }).then(function ()
                 {
-                    browserHistory.push('/gameend');
+                    hashHistory.push('/gameend');
                 });
             }
         }
@@ -157,15 +156,19 @@ class Game extends Component {
         if (this.state.showFinished) {
             show = <img className="finished-puzzle" src="/img/solved_bg.png" />;
         } else {
-            show = this.state.positions.map((i, key)=>
+
+            var sorted = _.sortBy(this.state.positions);
+
+            console.log('sorted',sorted);
+
+            show = sorted.map((key)=>
             {
-                let cellClass = key != 8 ? "cell" : 'empty cell';
+                let cellClass = key != '' ? "cell" : 'empty cell';
                 let [x,y] = layout[this.state.positions.indexOf(key)];
-                return <div key={ key }
-                            className={ cellClass }
+                return <div key = { key } className={ cellClass }
                             onClick={ this.updatePosition.bind(this, key) }
                             style={ { transform: `translate3d(${ x + 10 }px,${ y + 10 }px,0)` } }>
-                    <img src={ `/img/${ key }.png`} />
+                    {key == ''? '' : <img src={ `/img/${ key }.png`} />}
                 </div>
             });
         }

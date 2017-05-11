@@ -3,8 +3,8 @@ import axios from 'axios';
 export const USER_UPDATE = 'user_update';
 export const USER_SAVE_SUCCESS = 'user_save_success';
 export const USER_SAVE_ERROR = 'user_save_error';
-export const USER_REGISTERED = 'user_save_error';
-export const USER_NOT_REGISTERED = 'user_save_error';
+export const USER_REGISTERED = 'user_registered';
+export const USER_NOT_REGISTERED = 'user_not_registered';
 
 
 export const userUpdate = ({ prop, value }) =>
@@ -35,7 +35,7 @@ function userRegistered(response) {
 
     console.log('userRegistered', response);
 
-    if(response.status == "1") {
+    if(response == "1") {
         return {
             type: USER_REGISTERED
         }

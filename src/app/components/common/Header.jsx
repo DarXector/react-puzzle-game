@@ -14,6 +14,9 @@ function Header() {
                     <li>
                         <Link target="_blank" to="http://link2external.page.com" >PRAVILA</Link>
                     </li>
+                    <li>
+                        <Link to="/rewards" >NAGRADE</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
