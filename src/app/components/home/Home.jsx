@@ -15,17 +15,18 @@ class Home extends Component {
         super();
         this.inputs = [];
         this.state = {
-            userID: ''
+            userid: ''
         }
     }
 
     responseFacebook(response) {
         console.log('responseFacebook', response);
 
-        const {userID , name, email} = response;
+        const { name, email } = response;
+        const userid = response.userID;
 
-        if(userID) {
-            this.props.userCheckRegistered({ userID }).then(() => {
+        if(userid) {
+            this.props.userCheckRegistered({ userid }).then(() => {
                 console.log('this.props.loggedIn', this.props.loggedIn);
                 if(this.props.loggedIn) {
                     browserHistory.push('/pregame');
@@ -36,7 +37,7 @@ class Home extends Component {
                     this.form.emailInput.validation(email, true);
                     this.props.userUpdate({prop: 'email', value: email});
 
-                    this.setState({ userID });
+                    this.setState({ userid });
                 }
             });
         }
@@ -59,8 +60,8 @@ class Home extends Component {
 
         if(!allValid) return;
 
-        const {name, phone, email, city, country, userID} = this.props;
-        this.props.userSave({name, phone, email, city, country, userID}).then(() => {
+        const {name, phone, email, city, country, userid} = this.props;
+        this.props.userSave({name, phone, email, city, country, userid}).then(() => {
             console.log('this.props.loggedIn', this.props.loggedIn);
             if(this.props.loggedIn) {
                 browserHistory.push('/pregame');
@@ -75,12 +76,12 @@ class Home extends Component {
 
                 <p className="title">PODIJELI SA NAMA NEKOLIKO INFORMACIJA</p>
 
-                <Form userID={ this.state.userID }
+                <Form userid={ this.state.userid }
                       userUpdate={ this.props.userUpdate }
                       onConfirm={ this.onConfirm.bind(this) }
                       ref={(input) => { this.form = input }}/>
 
-                {this.state.userID? '' : <FacebookLogin
+                {this.state.userid? '' : <FacebookLogin
                     textButton="POVEŽI SA FACEBOOKOM"
                     appId="253686335106538"
                     autoLoad={true}

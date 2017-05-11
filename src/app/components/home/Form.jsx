@@ -19,10 +19,10 @@ class Form extends Component {
 
     render() {
 
-        const {userID, userUpdate, onConfirm} = this.props;
+        const {userid, userUpdate, onConfirm} = this.props;
 
         return (
-            <div className={ `form ${userID? '' : 'hidden'}` }>
+            <div className={ `form ${userid? '' : 'hidden'}` }>
                 <label>IME I PREZIME</label>
                 <TextInput
                     className="input-holder"

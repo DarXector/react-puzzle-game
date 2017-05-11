@@ -46,24 +46,30 @@ function userRegistered(response) {
     }
 }
 
-export const userCheckRegistered = ({ userID }) =>
+export const userCheckRegistered = ({ userid }) =>
 {
-    console.log('userCheckRegistered', userID);
+    console.log('userCheckRegistered', userid);
 
     return dispatch =>
     {
-        return axios.post(`/fbcheck.php?userid=${userID}`)
+        return axios.post('/fbcheck.php', { userid })
                     .then(response => dispatch(userRegistered(response.data)))
     };
 };
 
-export const userSave = ({ name, phone, email, city, country, userID }) =>
+export const userSave = ({ name, phone, email, city, country, userid }) =>
 {
-    console.log('userSave', name, phone, email, city, country, userID);
+    console.log('userSave', name, phone, email, city, country, userid);
 
     return dispatch =>
     {
-        return axios.post(`/user.php?name=${name}&phone=${phone}&email=${email}&city=${city}&country=${country}&userid=${userID}`)
-                    .then(response => dispatch(userSaved(response.data)))
+        return axios.post('/user.php', {
+                userid,
+                name,
+                phone,
+                email,
+                city,
+                country,
+            }).then(response => dispatch(userSaved(response.data)))
     };
 };

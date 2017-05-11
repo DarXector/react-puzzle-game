@@ -110,9 +110,10 @@ class Game extends Component {
             EventBus.publish("startTimer");
             this.props.startTimer(0);
 
-            axios.get('/game.php?action=start').then((response) => {
-                console.log('On game start token', response);
-                this.token = response;
+            axios.get('/game.php', { action:'start' }).then((response) => {
+                console.log('On game start get token', response);
+                this.token = response.data;
+                console.log('On game start token', this.token);
             });
 
         }.bind(this), 3000)
@@ -141,7 +142,8 @@ class Game extends Component {
             {
                 EventBus.publish("stopTimer");
                 this.props.stopTimer();
-                axios.post(`/game.php?token=${this.token}&action=end`).then(function ()
+                console.log('On game send token', this.token);
+                axios.post('/game.php', { token: this.token, action: 'end' }).then(function ()
                 {
                     browserHistory.push('/gameend');
                 });
