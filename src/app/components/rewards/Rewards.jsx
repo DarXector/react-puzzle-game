@@ -12,7 +12,7 @@ function Rewards() {
           <p className="description">72x Zlatni Pan,<br/>1x Pan MAJICA</p>
           <p className="title2">6. - 20. MJESTO</p>
           <p className="description">24x Zlatni Pan piva</p>
-          <Link to="/pregame">NAZAD</Link>
+          <Link to="/pregame">NATRAG</Link>
       </Page>
   )
 }
