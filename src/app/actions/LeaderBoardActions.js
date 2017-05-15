@@ -16,7 +16,7 @@ export const fetchLeaderboard = () =>
 {
     return dispatch =>
     {
-        return axios.get('/leaderboard.json')
+        return axios.get('/leaderboard.php')
              .then(response => dispatch(receiveLeaderboard(response.data)))
     };
 };

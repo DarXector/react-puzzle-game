@@ -5,14 +5,14 @@ import Timer from '../game/Timer'
 function Header() {
     return (
         <header>
-            <a href="https://www.w3schools.com" target="_blank" >
+            <a href="http://www.pan.com.hr/gl/hr/" target="_blank" >
                 <img alt="PAN" src="/img/pan_logo.png" />
             </a>
             <Timer />
             <nav>
                 <ul>
                     <li>
-                        <Link target="_blank" to="http://link2external.page.com" >PRAVILA</Link>
+                        <Link target="_blank" onClick={(event) => {event.preventDefault(); window.open("http://slagalica.pan.com.hr/Pravila_nagradnog_natjecaja_Pan_Slagalica.pdf");}}>PRAVILA</Link>
                     </li>
                     <li>
                         <Link to="/rewards" >NAGRADE</Link>

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { fetchLeaderboard } from '../../actions';
 
+import { toMMSS } from '../../util/time'
+
 class LeaderBoard extends Component {
 
     componentDidMount() {
@@ -11,9 +13,12 @@ class LeaderBoard extends Component {
 
     render() {
 
+        let pos = 0;
+
         function getUser(user){
-            return  <div key={user.position} className="user">
-                        { `${ user.position }. ${ user.name } (${ user.time })` }
+            pos++;
+            return  <div key={pos} className="user">
+                        { `${ pos }. ${ user.username } (${ toMMSS(parseInt(user.elapsed * 1000)) })` }
                     </div>
         }
 
